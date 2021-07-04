@@ -15,7 +15,7 @@ const addMessage = (author='anonymous', content) => {
 msgForm.addEventListener('submit', (event) => {
   event.preventDefault()
   if(msgInput.value) {
-    socket.emit('chat message', msgInput.value)
+    socket.emit('message', msgInput.value)
     msgInput.value = ''
   }
 })
@@ -26,17 +26,9 @@ nicknameForm.addEventListener('submit', (event) => {
   console.log(value)
   if(value) {
     socket.emit('set nickname', value) 
+
+    document.getElementById('current-nickname').textContent = `current nickname: ${value}`
   }
 })
 
-socket.on('chat message', ({ content, author }) => {
-  addMessage(author, content)
-})
-
-socket.on('user joined', () => {
-  addMessage('CHAT', 'a new user joined')
-})
-
-socket.on('user left', () => {
-  addMessage('CHAT', 'a user left')
-})
+socket.on('message', ({ content, author }) => addMessage(author, content))
