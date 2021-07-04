@@ -1,30 +1,42 @@
 const socket = io()
 
 const messages = document.getElementById('messages')
-const input = document.getElementById('message-input')
-const submitButton = document.getElementById('submit-button')
+const msgInput = document.getElementById('message-input')
+const nicknameInput = document.getElementById('nickname-input')
+const msgForm = document.getElementById('message-form')
+const nicknameForm = document.getElementById('nickname-form')
 
-const addMessage = (text, user='anonymous') => {
+const addMessage = (author='anonymous', content) => {
   const newMsg = document.createElement('p')
-  newMsg.textContent = user + ': ' + text
+  newMsg.textContent = author + ': ' + content
   messages.appendChild(newMsg)
 }
 
-submitButton.addEventListener('click', (event) => {
-  if(input.value) {
-    socket.emit('chat message', input.value)
-    input.value = ''
+msgForm.addEventListener('submit', (event) => {
+  event.preventDefault()
+  if(msgInput.value) {
+    socket.emit('chat message', msgInput.value)
+    msgInput.value = ''
   }
 })
 
-socket.on('chat message', (msg) => {
-  addMessage(msg)
+nicknameForm.addEventListener('submit', (event) => {
+  event.preventDefault()
+  const { value } = nicknameInput
+  console.log(value)
+  if(value) {
+    socket.emit('set nickname', value) 
+  }
 })
 
-socket.on('user joined', (socket) => {
-  addMessage(`${socket.nickname || 'user'} joined`, 'CHAT')
+socket.on('chat message', ({ content, author }) => {
+  addMessage(author, content)
 })
 
-socket.on('user left', (socket) => {
-  addMessage(`${socket.nickname || 'user'} left`, 'CHAT')
+socket.on('user joined', () => {
+  addMessage('CHAT', 'a new user joined')
+})
+
+socket.on('user left', () => {
+  addMessage('CHAT', 'a user left')
 })
