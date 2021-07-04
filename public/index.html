@@ -8,5 +8,26 @@
 </head>
 <body>
   <h1>Chat App</h1>
+  <div id="messages">
+  </div>
+
+  <div>
+    <input type="text" id="message-input" placeholder="write your message">
+    <button id="message-button">set</button>
+  </div>
+
+  <div>
+    <input type="text" id="message-input" placeholder="set nickname">
+    <button id="nickname-button">send</button>
+  </div>
+
+  <footer>
+    Created by 
+    <a href="https://github.com/miguelDalberto">
+      Miguel Dalberto
+    </a>
+  </footer>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/chat.js"></script>
 </body>
 </html>
