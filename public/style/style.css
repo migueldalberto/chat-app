@@ -19,6 +19,24 @@ body {
   flex-grow: 1;
 }
 
+form { 
+  left: 0; 
+  right: 0; 
+  display: flex; 
+  height: 3rem; 
+}
+
+input {
+  flex-grow: 1 
+}
+
+form > button { 
+  background: #1abbaa; 
+  padding: 0 1rem; 
+  margin: 0.25rem; 
+  border-radius: 3px; 
+}
+
 footer {
   color: #888888;
   border-top: 1px solid #CCCCCC;
