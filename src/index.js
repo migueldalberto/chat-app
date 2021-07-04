@@ -11,15 +11,15 @@ const io = new Server(server)
 app.use(express.static(path.join(__dirname, '../public')))
 
 io.on('connection', (socket) => {
-  socket.broadcast.emit('user joined')
+  socket.broadcast.emit('message', { author: 'CHAT', content: 'A user has joined.'})
   socket.nickname = 'anonymous'
 
   socket.on('disconnect', () => {
-    socket.broadcast.emit('user left')
+    io.emit('message', { author: 'CHAT', content: 'A user has left.'})
   })
 
-  socket.on('chat message', (message) => {
-    io.emit('chat message', { author: socket.nickname, content: message })
+  socket.on('message', (message) => {
+    io.emit('message', { author: socket.nickname, content: message })
   })
 
   socket.on('set nickname', (nickname) => {
