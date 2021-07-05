@@ -4,6 +4,8 @@ const express = require('express')
 const { Server } = require('socket.io')
 
 const { createMessage } = require('./utils/messages')
+const { addUser, removeUser, getUsersInRoom } = require('./utils/users')
+const { callbackify } = require('util')
 
 const app = express()
 const server = http.createServer(app)
@@ -13,23 +15,29 @@ const io = new Server(server)
 app.use(express.static(path.join(__dirname, '../public')))
 
 io.on('connection', (socket) => {
-  socket.nickname = 'anonymous'
-
   socket.on('disconnect', () => {
-    io.to().emit('message', createMessage('SYSTEM', `${socket.nickname} has left.`))
+    const user = removeUser(socket.id)
+    if(user) {
+      io.to(user.room).emit('message', createMessage('SYSTEM', `${user.nickname} has left.`))
+    }
   })
 
   socket.on('message', (message, cb) => {
-    io.emit('message', createMessage(socket.nickname, message))
+    io.to(socket.room).emit('message', createMessage(socket.nickname, message))
 
     cb(undefined, 'message sent')
   })
 
-  socket.on('join', ({ nickname, room }, cb) => {
-    socket.join(room)
-    socket.nickname = nickname
+  socket.on('join', (options, cb) => {
+    const { error, user } = addUser({ id: socket.id, ...options })
+    if(error) return cb(error, undefined)
 
-    socket.broadcast.to(room).emit('message', createMessage('SYSTEM', `${socket.nickname} has joined.`))
+    socket.join(user.room)
+    socket.nickname = user.nickname
+    socket.room = user.room
+
+    socket.broadcast.to(socket.room).emit('message', createMessage('SYSTEM', `${socket.nickname} has joined.`))
+    cb(undefined, user)
   })
 })
 

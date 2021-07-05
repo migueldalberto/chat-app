@@ -41,5 +41,8 @@ msgForm.addEventListener('submit', (event) => {
 socket.on('message', (message) => addMessage(message))
 
 socket.emit('join', { nickname, room }, (err, res) => {
-  if(err)return alert("Failed to join room.")
+  if(err) {
+    alert("Failed to join room: " + err)
+    location.replace('/')
+  }
 })

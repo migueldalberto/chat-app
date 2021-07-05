@@ -30,19 +30,10 @@ const removeUser = (id) => {
   }
 }
 
-const getUser = (id) => {
-  const index = users.findIndex((user) => user.id === id)
-
-  if(index !== -1) {
-    return users[index]
-  }
-}
-
 const getUsersInRoom = (room) => users.filter((user) => user.room === room)
 
 module.exports = {
   addUser,
   removeUser,
-  getUser,
   getUsersInRoom
 }
