@@ -6,22 +6,18 @@ body {
 body {
   display: flex;
   align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
   background-color: #DDD;
 }
 
-.form-signin {
+main {
+  padding-top: 3em;
+  flex-grow: 1
+}
+
+form {
   width: 100%;
-  max-width: 330px;
-  padding: 15px;
+  max-width: 10em;
   margin: auto;
-}
-
-.form-signin .checkbox {
-  font-weight: 400;
-}
-
-.form-signin .form-floating:focus-within {
-  z-index: 2;
+  display:flex; 
+  flex-wrap: wrap
 }
