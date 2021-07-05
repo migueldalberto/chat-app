@@ -27,15 +27,19 @@ msgForm.addEventListener('submit', (event) => {
   event.preventDefault()
   if(msgInput.value) {
     msgFormButton.setAttribute('disabled', 'disabled')
+
     socket.emit('message', msgInput.value, (err, res) => {
       msgFormButton.removeAttribute('disabled')
       msgInput.value = ''
       msgInput.focus()
-      if(err)return console.error(err)
 
-      console.log(res)
+      if(err)return console.error(err)
     })
   }
 })
 
 socket.on('message', (message) => addMessage(message))
+
+socket.emit('join', { nickname, room }, (err, res) => {
+  if(err)return alert("Failed to join room.")
+})

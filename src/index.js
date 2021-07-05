@@ -13,11 +13,10 @@ const io = new Server(server)
 app.use(express.static(path.join(__dirname, '../public')))
 
 io.on('connection', (socket) => {
-  socket.broadcast.emit('message', createMessage('SYSTEM', 'A user has joined.'))
   socket.nickname = 'anonymous'
 
   socket.on('disconnect', () => {
-    io.emit('message', createMessage('SYSTEM', `${socket.nickname} has left.`))
+    io.to().emit('message', createMessage('SYSTEM', `${socket.nickname} has left.`))
   })
 
   socket.on('message', (message, cb) => {
@@ -26,6 +25,12 @@ io.on('connection', (socket) => {
     cb(undefined, 'message sent')
   })
 
+  socket.on('join', ({ nickname, room }, cb) => {
+    socket.join(room)
+    socket.nickname = nickname
+
+    socket.broadcast.to(room).emit('message', createMessage('SYSTEM', `${socket.nickname} has joined.`))
+  })
 })
 
 // listenning to port
