@@ -1,42 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-100" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="css/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style1.css">
   <title>Chat App</title>
 </head>
-<body>
-  <header>
-    <h1>Chat App</h1>
-  </header>
-  <div class="main">
-    <div id="messages">
+
+<body class="text-center d-flex flex-column h-100">
+  <main class="form-signin flex-shrink-0">
+      <header>
+        <h1>Chat App</h1>
+      </header>
+      <form action="./chat.html"> <div class="mb-3">
+          <label for="nicknameInput" class="form-label">nickname</label>
+          <input type="text" name="nickname" placeholder="set your nickname" id="nicknameInput" required>
+        </div>
+        <div class="mb-3">
+          <label for="roomInput" class="form-label">chat room</label>
+          <input type="text" name="room" placeholder="insert the room name" id="roomInput" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Join</button>
+      </form>
+  </main>
+
+
+  <footer class="footer mt-auto py-3">
+    <div class="container">
+      Created by 
+      <a href="https://github.com/miguelDalberto">
+        Miguel Dalberto
+      </a>
     </div>
-    <div id="online-now-tab">
-      <ul id="online-now">
-      </ul>
-    </div>
-  </div>
-
-  <p id="current-nickname">current nickname: </p>
-  <form id="message-form" action="">
-    <input id="message-input" autocomplete="off" placeholder="write your message" /><button id="msg-form-button">Send</button>
-  </form>
-
-  <form id="nickname-form" action="">
-    <input id="nickname-input" autocomplete="off" placeholder="set your nickname" /><button id="nickname-form-button">Set</button>
-  </form>
-
-  <footer>
-    Created by 
-    <a href="https://github.com/miguelDalberto">
-      Miguel Dalberto
-    </a>
   </footer>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="js/chat.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
