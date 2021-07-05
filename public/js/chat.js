@@ -5,6 +5,8 @@ const messages = document.getElementById('messages')
 const msgInput = document.getElementById('message-input')
 const msgForm = document.getElementById('message-form')
 const msgFormButton = document.getElementById('msg-form-button')
+const onlineNow = document.getElementById('online-now')
+const header = document.getElementById('header')
 
 // parse nickname and room from querystring
 const [ nickname, room ] = location.search
@@ -39,6 +41,17 @@ msgForm.addEventListener('submit', (event) => {
 })
 
 socket.on('message', (message) => addMessage(message))
+
+socket.on('room data', (data) => {
+  onlineNow.innerHTML = ''
+  header.textContent = data.room 
+
+  data.users.forEach((user) => {
+    const newUser = document.createElement('li')
+    newUser.textContent = user.nickname
+    onlineNow.append(newUser)
+  })
+})
 
 socket.emit('join', { nickname, room }, (err, res) => {
   if(err) {

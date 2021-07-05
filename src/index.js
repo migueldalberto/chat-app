@@ -19,6 +19,11 @@ io.on('connection', (socket) => {
     const user = removeUser(socket.id)
     if(user) {
       io.to(user.room).emit('message', createMessage('SYSTEM', `${user.nickname} has left.`))
+
+      io.to(socket.room).emit('room data', {
+        room: socket.room,
+        users: getUsersInRoom(socket.room)
+      })
     }
   })
 
@@ -37,6 +42,11 @@ io.on('connection', (socket) => {
     socket.room = user.room
 
     socket.broadcast.to(socket.room).emit('message', createMessage('SYSTEM', `${socket.nickname} has joined.`))
+    io.to(socket.room).emit('room data', {
+      room: socket.room,
+      users: getUsersInRoom(socket.room)
+    })
+
     cb(undefined, user)
   })
 })
