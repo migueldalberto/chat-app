@@ -10,6 +10,7 @@ const addMessage = (author='anonymous', content) => {
   const newMsg = document.createElement('p')
   newMsg.textContent = author + ': ' + content
   messages.appendChild(newMsg)
+  messages.scrollTo(0, messages.scrollHeight)
 }
 
 msgForm.addEventListener('submit', (event) => {
