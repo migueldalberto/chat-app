@@ -6,6 +6,14 @@ const msgInput = document.getElementById('message-input')
 const msgForm = document.getElementById('message-form')
 const msgFormButton = document.getElementById('msg-form-button')
 
+// parse nickname and room from querystring
+const [ nickname, room ] = location.search
+  .slice(1)
+  .split('&')
+  .map((i) => {
+    return decodeURI(i.split('=')[1])
+  })
+
 const addMessage = (message={}) => {
   const newMsg = document.createElement('p')
   const time = new Date(message.createdAt)
