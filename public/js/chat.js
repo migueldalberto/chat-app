@@ -8,9 +8,11 @@ const nicknameForm = document.getElementById('nickname-form')
 const msgFormButton = document.getElementById('msg-form-button')
 const nicknameFormButton = document.getElementById('nickname-form-button')
 
-const addMessage = (author='anonymous', content) => {
+const addMessage = (message={}) => {
   const newMsg = document.createElement('p')
-  newMsg.textContent = author + ': ' + content
+  const time = new Date(message.createdAt)
+  const parsedTime = `${time.getHours()}:${time.getMinutes()}`
+  newMsg.textContent = `${message.author} [${parsedTime}]: ${message.content}`
   messages.appendChild(newMsg)
   messages.scrollTo(0, messages.scrollHeight)
 }
@@ -48,4 +50,4 @@ nicknameForm.addEventListener('submit', (event) => {
   }
 })
 
-socket.on('message', ({ content, author }) => addMessage(author, content))
+socket.on('message', (message) => addMessage(message))

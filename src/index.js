@@ -10,16 +10,24 @@ const io = new Server(server)
 // serving public directory
 app.use(express.static(path.join(__dirname, '../public')))
 
+const createMessage = (author, content) => {
+  return {
+    author,
+    content,
+    createdAt: new Date().getTime()
+  }
+}
+
 io.on('connection', (socket) => {
-  socket.broadcast.emit('message', { author: 'CHAT', content: 'A user has joined.'})
+  socket.broadcast.emit('message', createMessage('SYSTEM', 'A user has joined.'))
   socket.nickname = 'anonymous'
 
   socket.on('disconnect', () => {
-    io.emit('message', { author: 'CHAT', content: `${socket.nickname} has left.`})
+    io.emit('message', createMessage('SYSTEM', `${socket.nickname} has left.`))
   })
 
   socket.on('message', (message, cb) => {
-    io.emit('message', { author: socket.nickname, content: message })
+    io.emit('message', createMessage(socket.nickname, message))
 
     cb(undefined, 'message sent')
   })
