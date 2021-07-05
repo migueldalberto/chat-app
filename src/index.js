@@ -15,7 +15,7 @@ io.on('connection', (socket) => {
   socket.nickname = 'anonymous'
 
   socket.on('disconnect', () => {
-    io.emit('message', { author: 'CHAT', content: 'A user has left.'})
+    io.emit('message', { author: 'CHAT', content: `${socket.nickname} has left.`})
   })
 
   socket.on('message', (message, cb) => {
