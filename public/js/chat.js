@@ -16,7 +16,12 @@ const addMessage = (author='anonymous', content) => {
 msgForm.addEventListener('submit', (event) => {
   event.preventDefault()
   if(msgInput.value) {
-    socket.emit('message', msgInput.value)
+
+    socket.emit('message', msgInput.value, (err, res) => {
+      if(err)return console.error(err)
+
+      console.log(res)
+    })
     msgInput.value = ''
   }
 })
@@ -26,7 +31,11 @@ nicknameForm.addEventListener('submit', (event) => {
   const { value } = nicknameInput
   console.log(value)
   if(value) {
-    socket.emit('set nickname', value) 
+    socket.emit('set nickname', value, (err, res) => {
+      if(err)return console.error(err)
+
+      console.log(res)
+    }) 
 
     document.getElementById('current-nickname').textContent = `current nickname: ${value}`
   }

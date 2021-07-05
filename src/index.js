@@ -18,12 +18,16 @@ io.on('connection', (socket) => {
     io.emit('message', { author: 'CHAT', content: 'A user has left.'})
   })
 
-  socket.on('message', (message) => {
+  socket.on('message', (message, cb) => {
     io.emit('message', { author: socket.nickname, content: message })
+
+    cb(undefined, 'message sent')
   })
 
-  socket.on('set nickname', (nickname) => {
+  socket.on('set nickname', (nickname, cb) => {
     socket.nickname = nickname
+
+    cb(undefined, `nickname set to: ${socket.nickname}`)
   })
 })
 
