@@ -3,20 +3,14 @@ const http = require('http')
 const express = require('express')
 const { Server } = require('socket.io')
 
+const { createMessage } = require('./utils/messages')
+
 const app = express()
 const server = http.createServer(app)
 const io = new Server(server)
 
 // serving public directory
 app.use(express.static(path.join(__dirname, '../public')))
-
-const createMessage = (author, content) => {
-  return {
-    author,
-    content,
-    createdAt: new Date().getTime()
-  }
-}
 
 io.on('connection', (socket) => {
   socket.broadcast.emit('message', createMessage('SYSTEM', 'A user has joined.'))
