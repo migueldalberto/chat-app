@@ -5,7 +5,6 @@ const { Server } = require('socket.io')
 
 const { createMessage } = require('./utils/messages')
 const { addUser, removeUser, getUsersInRoom } = require('./utils/users')
-const { callbackify } = require('util')
 
 const app = express()
 const server = http.createServer(app)
