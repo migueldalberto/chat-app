@@ -26,11 +26,6 @@ io.on('connection', (socket) => {
     cb(undefined, 'message sent')
   })
 
-  socket.on('set nickname', (nickname, cb) => {
-    socket.nickname = nickname
-
-    cb(undefined, `nickname set to: ${socket.nickname}`)
-  })
 })
 
 // listenning to port
