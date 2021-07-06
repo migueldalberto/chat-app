@@ -14,11 +14,20 @@ const nickname = options.get('nickname')
 const room = options.get('room')
 
 const addMessage = (message={}) => {
-  const newMsg = document.createElement('div')
-  const time = new Date(message.createdAt)
-  const parsedTime = `${time.getHours()}:${time.getMinutes()}`
-  newMsg.innerHTML = `<h5>${message.author} [${parsedTime}]</h5>\n<p>${message.content}</p>`
-  messages.appendChild(newMsg)
+  const newDiv = document.createElement('div')
+  const authorP = document.createElement('p')
+  const contentP = document.createElement('p')
+  const parsedTime = moment(new Date(message.createdAt)).format("LT")
+
+  authorP.textContent = `${message.author} [${parsedTime}]`
+  authorP.setAttribute('class', 'fs-5 fw-bolder author-nickname')
+  contentP.textContent = message.content
+
+  newDiv.appendChild(authorP)
+  newDiv.appendChild(contentP)
+  newDiv.setAttribute('class', 'msg')
+
+  messages.appendChild(newDiv)
   messages.scrollTo(0, messages.scrollHeight)
 }
 

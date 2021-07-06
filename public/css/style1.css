@@ -7,6 +7,15 @@ body {
   overflow-y: scroll;
 }
 
+.author-nickname {
+  margin-bottom: 3px;
+}
+
+.msg {
+  margin: 1rem;
+  margin-left: 2em;
+}
+
 /* body {
   display: flex;
   align-items: center;
