@@ -15,22 +15,3 @@ body {
   margin: 1rem;
   margin-left: 2em;
 }
-
-/* body {
-  display: flex;
-  align-items: center;
-  background-color: #DDD;
-}
-
-main {
-  padding-top: 3em;
-  flex-grow: 1
-}
-
-form {
-  width: 100%;
-  max-width: 10em;
-  margin: auto;
-  display:flex; 
-  flex-wrap: wrap
-} */
