@@ -4,8 +4,8 @@ const http = require('http')
 const express = require('express')
 const { Server } = require('socket.io')
 
-const { createMessage } = require('./utils/messages')
-const { addUser, removeUser, getUsersInRoom } = require('./utils/users')
+import { createMessage } from './utils/messages'
+import { addUser, removeUser, getUsersInRoom, User, ErrorMessage } from './utils/users'
 
 const app = express()
 const server = http.createServer(app)
@@ -18,7 +18,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     const user = removeUser(socket.id)
     if(user) {
-      io.to(user.room).emit('message', createMessage('SYSTEM', `${user.nickname} has left.`))
+      io.to(user.getRoom()).emit('message', createMessage('SYSTEM', `${user.getNickname()} has left.`))
 
       io.to(socket.room).emit('room data', {
         room: socket.room,
@@ -34,12 +34,13 @@ io.on('connection', (socket) => {
   })
 
   socket.on('join', (options, cb) => {
-    const { error, user } = addUser({ id: socket.id, ...options })
-    if(error) return cb(error, undefined)
+    const res = addUser({ id: socket.id, ...options })
+    if(res.error)return cb(res.error, undefined) 
+    const { user } = res;
 
-    socket.join(user.room)
-    socket.nickname = user.nickname
-    socket.room = user.room
+    socket.join(user.getRoom())
+    socket.nickname = user.getNickname()
+    socket.room = user.getRoom()
 
     socket.broadcast.to(socket.room).emit('message', createMessage('SYSTEM', `${socket.nickname} has joined.`))
     io.to(socket.room).emit('room data', {
