@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "watch": true
+    "target": "ES6",
+    "watch": true,
+    "module": "CommonJS"
   }
 }
