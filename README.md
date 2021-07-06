@@ -16,6 +16,8 @@ Currently, it is hosted on Heroku.
 
 ``npm install``
 
-``npm run dev``
+``npm build``
+
+``npm start``
 
 Access `http://localhost:3000`.
