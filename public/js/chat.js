@@ -14,10 +14,10 @@ const nickname = options.get('nickname')
 const room = options.get('room')
 
 const addMessage = (message={}) => {
-  const newMsg = document.createElement('p')
+  const newMsg = document.createElement('div')
   const time = new Date(message.createdAt)
   const parsedTime = `${time.getHours()}:${time.getMinutes()}`
-  newMsg.textContent = `${message.author} [${parsedTime}]: ${message.content}`
+  newMsg.innerHTML = `<h5>${message.author} [${parsedTime}]</h5>\n<p>${message.content}</p>`
   messages.appendChild(newMsg)
   messages.scrollTo(0, messages.scrollHeight)
 }
@@ -46,6 +46,7 @@ socket.on('room data', (data) => {
   data.users.forEach((user) => {
     const newUser = document.createElement('li')
     newUser.textContent = user.nickname
+    newUser.setAttribute('class', 'list-group-item')
     onlineNow.append(newUser)
   })
 })
