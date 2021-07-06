@@ -3,7 +3,7 @@ body {
   height: 100%;
 }
 
-body {
+/* body {
   display: flex;
   align-items: center;
   background-color: #DDD;
@@ -20,4 +20,4 @@ form {
   margin: auto;
   display:flex; 
   flex-wrap: wrap
-}
+} */
