@@ -7,7 +7,7 @@
     "start": "node build/index.js",
     "dev": "nodemon build/index.js",
     "build": "tsc",
-    "tsc": "tsc"
+    "tsc": "tsc --watch"
   },
   "author": "miguelDalberto",
   "license": "ISC",

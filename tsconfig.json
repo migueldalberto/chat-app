@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "watch": true,
     "module": "CommonJS",
     "outDir": "./build"
   }
