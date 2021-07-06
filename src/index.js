@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
 })
 
 // listenning to port
-const port = process.env.PORT 
+const port = process.env.PORT || 3000 
 server.listen(port, () => {
   console.log('server is on: ' + port)
 })
