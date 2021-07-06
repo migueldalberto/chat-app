@@ -9,12 +9,9 @@ const onlineNow = document.getElementById('online-now')
 const header = document.getElementById('header')
 
 // parse nickname and room from querystring
-const [ nickname, room ] = location.search
-  .slice(1)
-  .split('&')
-  .map((i) => {
-    return decodeURI(i.split('=')[1])
-  })
+const options = new URLSearchParams(location.search)
+const nickname = options.get('nickname')
+const room = options.get('room')
 
 const addMessage = (message={}) => {
   const newMsg = document.createElement('p')
