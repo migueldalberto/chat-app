@@ -5,7 +5,7 @@ const express = require('express')
 const { Server } = require('socket.io')
 
 import { createMessage } from './utils/messages'
-import { addUser, removeUser, getUsersInRoom, User, ErrorMessage } from './utils/users'
+import { addUser, removeUser, getUsersInRoom, User } from './utils/users'
 
 const app = express()
 const server = http.createServer(app)
