@@ -29,10 +29,12 @@ io.on('connection', (socket) => {
       io.to(room).emit('message', createMessage('SYSTEM', `${user.getNickname()} has left.`))
       const index = activeRooms.findIndex((r) => r.getRoomName() === room)
 
-      if(activeRooms[index].total() === 1) {
-        activeRooms.splice(index, 1)
-      } else {
-        activeRooms[index].removeUser(socket.id) 
+      if(index !== -1) {
+        if(activeRooms[index].total() === 1) {
+          activeRooms.splice(index, 1)
+        } else {
+          activeRooms[index].removeUser(socket.id) 
+        }
       }
 
       io.to(room).emit('room data', {
