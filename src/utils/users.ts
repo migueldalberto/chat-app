@@ -49,6 +49,15 @@ export class UserList {
     users.push(user)
   }
 
+  /**
+   * total
+   * @returns the total of users
+   */
+  public total(): number {
+    return users.length
+    
+  }
+
   public removeUser(id: string) {
     const index = users.findIndex((user) => user.getId() === id)
 
