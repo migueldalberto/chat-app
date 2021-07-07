@@ -59,10 +59,7 @@ io.on('connection', (socket) => {
     socket.join(room.getRoomName())
 
     const index = activeRooms.findIndex((r) => r.getRoomName() === room.getRoomName())
-    if (index !== -1) {
-      activeRooms[index].addUser(user)
-    } else {
-      room.addUser(user)
+    if (index === -1) {
       activeRooms.push(room)
     }
 
