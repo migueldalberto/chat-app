@@ -5,7 +5,7 @@ const express = require('express')
 const { Server } = require('socket.io')
 
 import { createMessage } from './utils/messages'
-import { getUsersInRoom, User, UserList } from './utils/users'
+import { User, UserList } from './utils/users'
 
 const app = express()
 const server = http.createServer(app)
@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
     socket.broadcast.to(user.getRoom()).emit('message', createMessage('SYSTEM', `${user.getNickname()} has joined.`))
     io.to(user.getRoom()).emit('room data', {
       room: user.getRoom(),
-      users: getUsersInRoom(user.getRoom())
+      users: usersOnline.getUsersInRoom(user.getRoom())
     })
 
     cb(undefined, user)
