@@ -26,6 +26,38 @@ export class User {
   }
 }
 
+export class UserList {
+  private users: User[];
+
+  public getUsers(): User[] {
+    return users
+  }
+
+  public getUsersInRoom(room: string): User[] {
+    return users.filter((user) => user.getRoom() === room)
+  }
+
+  public getUserById(id: string) {
+    const index = users.findIndex((u) => u.getId() === id)
+
+    if(index !== -1) {
+      return users[index]
+    }
+  }
+
+  public addUser(user: User) {
+    users.push(user)
+  }
+
+  public removeUser(id: string) {
+    const index = users.findIndex((user) => user.getId() === id)
+
+    if (index !== -1) {
+      return users.splice(index, 1)[0]
+    }
+  }
+}
+
 const users: User[] = []
 
 export const addUser = ({ id , nickname, room }: { id: string; nickname: string; room: string}): any => {
