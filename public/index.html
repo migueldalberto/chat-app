@@ -28,7 +28,11 @@
             </div>
             <div>
               <label for="roomInput">chat room</label>
-              <input type="text" name="room" placeholder="insert the room name" id="roomInput" required>
+              <input type="text" name="room" list="active-rooms" placeholder="insert the room name" id="roomInput" required>
+
+              <datalist id="active-rooms">
+
+              </datalist>
             </div>
             <button class="btn btn-primary" type="submit">Join</button>
           </form>
