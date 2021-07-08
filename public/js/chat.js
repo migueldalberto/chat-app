@@ -62,7 +62,7 @@ socket.on('room data', (data) => {
 
 socket.emit('join', { nickname, room }, (err, res) => {
   if(err) {
-    alert("Failed to join room: " + err)
+    alert("Failed to join room: " + err.error)
     location.replace('/')
   }
 })
