@@ -45,8 +45,9 @@ export class UserList {
     }
   }
 
-  public addUser(user: User) {
+  public addUser(user: User): User {
     users.push(user)
+    return user;
   }
 
   /**

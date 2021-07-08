@@ -55,6 +55,9 @@ io.on('connection', (socket) => {
     if(!options.nickname || !options.room)return cb({ error: 'invalid room or nickname'}, undefined)
 
     const user = new User(socket.id, options.nickname, options.room)
+    if (usersOnline.getUsers().find((u) => u.getNickname() === user.getNickname())) {
+      return cb({ error: 'nickname is taken' }, undefined)
+    }
     usersOnline.addUser(user)
 
     const room = new Room(user.getRoom())
