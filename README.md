@@ -5,9 +5,6 @@ Web chat with rooms and nicknames created using
 and 
 [socket.io](https://expressjs.com/).
 
-Currently, it is hosted on Heroku.
-[Check it out.](https://dalberto-chat-app.herokuapp.com)
-
 ## Instructions
 
 ``git clone https://github.com/miguelDalberto/chat-app.git``
