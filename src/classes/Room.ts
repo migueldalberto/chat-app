@@ -1,7 +1,7 @@
-import { User } from '../classes/User'
-import { UserList } from './users'
+import User from './User'
+import UserList from './UserList'
 
-export class Room extends UserList {
+export default class Room extends UserList {
   private name: string;
 
   constructor(name: string) {

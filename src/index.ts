@@ -3,11 +3,10 @@ const http = require('http')
 const express = require('express')
 const { Server } = require('socket.io')
 
-import { User } from './classes/User'
-
-import { createMessage } from './utils/messages'
-import { UserList } from './utils/users'
-import { Room } from './utils/rooms'
+import User from './classes/User'
+import Message from './classes/Message'
+import UserList from './classes/UserList'
+import Room from './classes/Room'
 
 const app = express()
 const server = http.createServer(app)
@@ -27,7 +26,7 @@ io.on('connection', (socket) => {
     const user = usersOnline.removeUser(socket.id)
     if(user) {
       const room = user.getRoom()
-      io.to(room).emit('message', createMessage('SYSTEM', `${user.getNickname()} has left.`))
+      io.to(room).emit('message', new Message('SYSTEM', `${user.getNickname()} has left.`))
       const index = activeRooms.findIndex((r) => r.getRoomName() === room)
 
       if(index !== -1) {
@@ -47,7 +46,7 @@ io.on('connection', (socket) => {
 
   socket.on('message', (message, cb) => {
     const user = usersOnline.getUserById(socket.id)
-    io.to(user.getRoom()).emit('message', createMessage(user.getNickname(), message))
+    io.to(user.getRoom()).emit('message', new Message(user.getNickname(), message))
 
     cb(undefined, 'message sent')
   })
@@ -69,7 +68,7 @@ io.on('connection', (socket) => {
       activeRooms.push(room)
     }
 
-    socket.broadcast.to(user.getRoom()).emit('message', createMessage('SYSTEM', `${user.getNickname()} has joined.`))
+    socket.broadcast.to(user.getRoom()).emit('message', new Message('SYSTEM', `${user.getNickname()} has joined.`))
     io.to(user.getRoom()).emit('room data', {
       room: user.getRoom(),
       users: usersOnline.getUsersInRoom(user.getRoom())

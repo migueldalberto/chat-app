@@ -1,4 +1,4 @@
-export class User {
+export default class User {
   constructor(private id: string, private nickname: string, private room: string) {
     this.nickname = nickname.trim().toLocaleLowerCase()
     this.room = room.trim().toLowerCase()
