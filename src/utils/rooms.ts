@@ -1,4 +1,5 @@
-import { User, UserList } from './users'
+import { User } from '../classes/User'
+import { UserList } from './users'
 
 export class Room extends UserList {
   private name: string;

@@ -3,8 +3,10 @@ const http = require('http')
 const express = require('express')
 const { Server } = require('socket.io')
 
+import { User } from './classes/User'
+
 import { createMessage } from './utils/messages'
-import { User, UserList } from './utils/users'
+import { UserList } from './utils/users'
 import { Room } from './utils/rooms'
 
 const app = express()
