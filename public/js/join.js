@@ -5,7 +5,7 @@ const datalist = document.getElementById('active-rooms')
 socket.on('active rooms', (activeRooms = []) => {
   activeRooms.forEach(room => {
     const newOption = document.createElement('option')
-    newOption.setAttribute('value', room.name)
+    newOption.setAttribute('value', room)
 
     datalist.appendChild(newOption)
   })
