@@ -35,9 +35,9 @@ io.on('connection', (socket) => {
       const roomName = user.getRoomName()
       io.to(roomName).emit('message', new Message('SYSTEM', `${user.getNickname()} has left.`))
 
-	  activeRooms.removeUserFromRoom(roomName, socket.id)
+	  activeRooms.removeUserFromRoom(roomName, user)
 
-	  if (activeRooms.getRoom(roomName).total() === 0) {
+	  if (activeRooms.getRoom(roomName)?.total() === 0) {
 		  activeRooms.removeRoom(roomName)
 		  socket.emit('active rooms', activeRooms.getNames())
 	  }

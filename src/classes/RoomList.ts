@@ -1,4 +1,5 @@
 import Room from './Room'
+import User from './User'
 
 export default class RoomList {
 	private rooms: Room[]
@@ -31,11 +32,11 @@ export default class RoomList {
 		return names
 	}
 
-	public removeUserFromRoom(roomName: string, id: string): void { 
+	public removeUserFromRoom(roomName: string, user: User): void { 
 		const index = this.rooms.findIndex((r) => r.getRoomName() === roomName)
 
 		if (index !== -1) {
-			this.rooms[index].removeUser(id) 
+			this.rooms[index].removeUser(user.getId()) 
 		}
 	}
 
