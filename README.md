@@ -5,12 +5,12 @@ Web chat with rooms and nicknames created using
 and 
 [socket.io](https://expressjs.com/).
 
-## Instructions
+## Running locally
 
     git clone https://github.com/miguelDalberto/chat-app.git
     cd chat-app
     npm install
-    npm build
-    npm start 
+    npm run build
+    npm run start 
 
 Access `http://localhost:3000`.
