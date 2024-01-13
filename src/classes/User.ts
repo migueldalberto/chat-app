@@ -1,14 +1,14 @@
 export default class User {
-  constructor(private id: string, private nickname: string, private room: string) {
+  constructor(private id: string, private nickname: string, private roomName: string) {
     this.nickname = nickname.trim().toLocaleLowerCase()
-    this.room = room.trim().toLowerCase()
+    this.roomName = roomName.trim().toLowerCase()
   }
 
   /**
    * @returns the room where the user is active
    */
-  public getRoom(): string {
-    return this.room
+  public getRoomName(): string {
+    return this.roomName
   }
 
   /**

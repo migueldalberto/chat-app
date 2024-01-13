@@ -12,7 +12,7 @@ export default class UserList {
   }
 
   public getUsersInRoom(room: string): User[] {
-    return this.users.filter((user) => user.getRoom() === room)
+    return this.users.filter((user) => user.getRoomName() === room)
   }
 
   public getUserById(id: string) {
